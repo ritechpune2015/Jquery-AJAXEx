@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+       
+    </head>
+    <body>
+      <input type="button" value="Read" id="btn" />
+      <h2> Product List (AJAX) </h2>
+      <table>
+          <thead>
+              <tr>
+                  <th> Product ID</th>
+                  <th> Product Name</th>
+                  <th> Mfg Name </th>
+                  <th> Price </th>
+              </tr>
+          </thead>
+       <tbody id="tb">
+       </tbody>
+    </table>
+
+    <script type="text/javascript" src="~/jquery/jquery.js"> </script>
+    <script type="text/javascript">
+      $(function(){
+         $("#btn").click(function(){
+       //    alert("button clicked!");
+           $.get("/Home/getProducts",function(data,status){
+         //   alert("data:"+JSON.stringify(data));
+           // alert("status:"+ status);
+             $("#tb").empty(); // will make tag empty
+             for(let i=0;i<data.length;i++)
+             {
+             
+             let str="<tr><td>" + data[i].productID +"</td>";
+             str+="<td>" + data[i].productName +"</td>";
+             str+="<td>"+ data[i].mfgName+"</td>";
+             str+="<td>"+ data[i].price+"</td></tr>";
+              $("#tb").append(str);
+             }
+           });
+         });
+      });
+    </script>
+
+    </body>
+    </html>

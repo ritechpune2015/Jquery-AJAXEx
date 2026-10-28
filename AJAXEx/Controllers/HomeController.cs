@@ -23,5 +23,17 @@ namespace AJAXEx.Controllers
             var res = Product.GetProducts();
             return Json(res);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody]Product rec)
+        {
+            return Json("Product Saved!");
+        }
     }
 }

@@ -23,7 +23,35 @@
     <script type="text/javascript" src="~/jquery/jquery.js"> </script>
     <script type="text/javascript">
       $(function(){
-         $("#btn").click(function(){
+
+            $("#btn").click(function()
+            {
+                 $.ajax({
+                    url:"/Home/getProducts",
+                    type:"Get",
+                    contentType:"application/json",
+                    success:function(result)
+                    {
+                      //alert(JSON.stringify(result));
+                      $("#tb").empty();
+                      $.each(result,function(index,item){
+                        // alert(index);
+                       //  alert(item);
+                        let row="<tr><td>"+item.productID +"</td>";
+                        row+="<td>"+item.productName +"</td>";
+                        row+="<td>" +item.mfgName+"</td>";
+                        row+="<td>"+ item.price+"</td></tr>";
+                        $("#tb").append(row);
+                      });
+                    },
+                    error:function(err){
+                      alert(JSON.stringify(err));
+                    }
+                 });
+            });
+
+          
+        /*  $("#btn").click(function(){
        //    alert("button clicked!");
            $.get("/Home/getProducts",function(data,status){
          //   alert("data:"+JSON.stringify(data));
@@ -39,8 +67,8 @@
               $("#tb").append(str);
              }
            });
-         });
-      });
+         }); */
+      }); 
     </script>
 
     </body>

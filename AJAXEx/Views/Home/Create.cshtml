@@ -1,0 +1,41 @@
+﻿@model AJAXEx.Models.Product
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+      <h2> New Product </h2>
+           Name: <input type="text" id="productname" /> <br />
+           Mfg Name: <input type="text" id="mfgname" /> <br />
+           Price: <input type="text" id="price" /> <br />
+           <input type="button" value="Save"  id="btn" />
+     
+           <script type="text/javascript" src="~/jquery/jquery.js"> </script>
+            <script type="text/javascript">
+                $("#btn").click(function(){
+                   var rec= {"productName":$("#productname").val(),"MfgName":$("#mfgname").val(),"Price":$("#price").val()};
+                   alert(JSON.stringify(rec));
+                   $.ajax({
+                    url:"/Home/Create",
+                    type:"Post",
+                    contentType:"application/json",
+                    data:JSON.stringify(rec),
+                    success:function(result)
+                    {
+                        alert(result);
+                    },
+                    error:function(err){
+                      alert(JSON.stringify(err));
+                    }
+                   });
+
+
+                    // $.post("/Home/Create",rec,function(res,status){
+                    //   alert(res);
+                    // });
+                });
+
+            </script>
+    </body>
+    </html>
